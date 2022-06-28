@@ -1,0 +1,8 @@
+cityName,country,description,monuments,averageRate,_id,id
+Barcelona,Spain,none,none,3.75,62a22e6d8724e0f12634df99,1.0
+Cracow,Poland,none,none,5.0,62a22ef98724e0f12634df9a,2.0
+Paris,France,none,none,4.5,62a22f2a8724e0f12634df9b,3.0
+Silvi Marina,Italy,Beautiful city next to Adriatic Sea,none,5.0,62babb7a701e77eeee93f651,4.0
+Udaipur,India,The historic capital of the kingdom of Mewar,Jharmar Kotra Stromatolite Fossil Park,0,62babcc2701e77eeee93f652,5.0
+Cairo,Egypt,"Capital of Egypt, the largest city in Arab World",Khan el-Khalili,3.0,62babdf8701e77eeee93f653,6.0
+Florence,Italy,Considered to be a birthplace of Renaissance,"Palazzo Vecchio, Palazzo Medici Riccardi",0.0,62bac220701e77eeee93f654,7.0
