@@ -46,11 +46,12 @@ Każde miejsce odwiedzone przez użytkownika może zostać ocenione w skali 1 - 
 
 
 ## Kwestie techniczne
-Backend aplikacji zostanie zaprogramowany w Pythonie, oraz przy użyciu Django REST framework, natomiast do wykonania frontendu wykorzystany zostanie typeScript oraz React. Systemem zarządzającym bazą danych jest MongoDB.
+Backend aplikacji zostanie zaprogramowany w Pythonie, oraz przy użyciu Django REST framework, natomiast do wykonania frontendu wykorzystany zostanie typeScript, React, NextJs i ChakraUI. Systemem zarządzającym bazą danych jest MongoDB.
 
-Poniżej diagram klas aplikacji:
+## Podział pracy
 
-![enter image description here](https://media.discordapp.net/attachments/893836286035640333/903968201937915966/unknown.png?width=1060&height=489)
+Backend + OpenApi + dokumentacja - Zuzanna Domagała i Klara Kot
+Frontend - Konrad Krysiak
 
 OpenAPI:
 

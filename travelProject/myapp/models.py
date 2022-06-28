@@ -43,29 +43,6 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 
-class HistoryRecord(models.Model):
-    id = models.IntegerField(primary_key=True)
-    actionType = models.IntegerField()
-    actionContent = models.IntegerField()
-    date = models.DateTimeField()
-
-
-class HistoryService(models.Model):
-    HistoryRecordCount = models.IntegerField()
-
-class weatherChoice(Enum):
-    su = "sunny"
-    wa = "warm"
-    co = "cold"
-    mod= "moderately"
-
-class cityType(Enum):
-    vil = "village"
-    to = "town"
-    ci = "city"
-    met = "metropolis"
-
-
 
 class Survey(models.Model):
     id = models.IntegerField(primary_key=True)

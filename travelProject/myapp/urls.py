@@ -6,13 +6,8 @@ from django.urls import path
 urlpatterns = [
     path('', views.index, name='index'),
     path('GAPlaces', views.getAllPlaces),
-    path('PlaceDetails', views.placeDetails),
-    path('GAUsers', views.getAllUsers),
-    path('UserDetails', views.userDetails),
     path('survey', views.surveyDetails),
     path('city', views.cityDetails),
-    #path('rate', views.cityRate),
-    #path('tenBest', views.tenBest),
     path('refreshToken', RefreshToken.as_view()),
     path('register', RegisterView.as_view()),
     path('login', LoginView.as_view()),

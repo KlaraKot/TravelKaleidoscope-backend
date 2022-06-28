@@ -162,7 +162,6 @@ class TenBestView(APIView):
             names1 = tenBest['cityName']
             names = []
             for n in names1:
-                print(n)
                 names.append(n)
 
             countries1 = tenBest['country']
@@ -824,43 +823,60 @@ def cityDetails(request):
             response = {"error"}
             return JsonResponse(response, safe=False)
 
-@csrf_exempt
-def cityRate(request):
-    if request.method == "POST":
+class RateCityView(APIView):
+    def post(self, request):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+
+            response = {
+                "status": "error",
+                "detail": "Unauthenticated"
+            }
+            return JsonResponse(status=403, data=response)
+
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            response = {
+                "status": "error",
+                "detail": "Expired Authentication"
+            }
+            return JsonResponse(status=403, data=response)
+
+
+        identyfikator = payload['id']
         json_data = json.loads(request.body)
         cityName = json_data['cityName']
-        rate = json_data['rate'] 
-        userId = json_data['userId'] 
-        try:
-            rate = models.cityRate(cityName=cityName,rate = rate,
-            userId = userId)
-            rate.save()
-            averageRateToCity()
-            response = {
-                "cityName": rate.cityName,
-                "rate": rate.rate,
-                "userId": rate.userId
-            }
-            return JsonResponse(response)
-        except:
-            response = {"error": "Error ed"}
-            return JsonResponse(response, safe=False)
-    
-    if request.method == "GET":
-        try:
-            rates = models.cityRate.objects.all()
-            response = []
-            for rate in rates:
-                obj = {
-                    "cityName": rate.cityName,
-                    "rate": rate.rate,
-                    "userId": rate.userId
+        rate = json_data['rate']
+
+        rating = models.cityRate.objects.filter(userId=identyfikator, cityName=cityName).first()
+
+        if rating is None:
+            try:
+                rate = models.cityRate(cityName=cityName,rate = rate,
+                userId = identyfikator)
+                rate.save()
+                averageRateToCity()
+                response = {
+                    "status": "rated",
+                    "detail": "Place rated successfully"
+
                 }
-                response.append(obj)
-            return JsonResponse(response, safe=False)
-        except:
-            response = {"error"}
-            return JsonResponse(response, safe=False)
+                return JsonResponse(status=200, data=response)
+            except:
+                response = {
+                "status": "error",
+                "detail": "Something went bad"
+            }
+            return JsonResponse(status=403, data=response)
+
+
+        response = {
+                "status": "error",
+                "detail": "Already rated by this user"
+            }
+        return JsonResponse(status=403, data=response)
 
 
 def tenBest(request):
@@ -869,8 +885,7 @@ def tenBest(request):
             response = []
             tenBest = []
             tenBest = tenBestRated()
-            print("best")
-            print(tenBest)
+            
 
             names = tenBest['cityName']
             countries = tenBest['country']
@@ -889,4 +904,5 @@ def tenBest(request):
         except:
             response={"error"}
             return JsonResponse(response, safe=False)
+
 
